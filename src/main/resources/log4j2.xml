@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="WARN">
+    <appenders>
+        <File name="requiredStationsFile" fileName="logs/appRequiredStations.log" immediateFlush="true">
+            <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </File>
+
+        <File name="ExceptionFile" fileName="logs/appExceptions.log" immediateFlush="true">
+            <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </File>
+
+        <File name="ErroneousStationsFile" fileName="logs/appErroneousStations.log" immediateFlush="true">
+            <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </File>
+
+    </appenders>
+    <loggers>
+
+        <logger name="ExceptionFileLogger" level="error">
+            <appender-ref ref="ExceptionFile"/>
+        </logger>
+
+        <logger name="RequiredStationsFileLogger" level="info">
+            <appender-ref ref="requiredStationsFile"/>
+        </logger>
+
+        <logger name="ErroneousStationsFileLogger" level="info">
+            <appender-ref ref="ErroneousStationsFile"/>
+        </logger>
+
+    </loggers>
+</configuration>
