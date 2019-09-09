@@ -44,6 +44,5 @@ public class Main {
                 ex.printStackTrace();
             }
         });
-//        images.forEach(System.out::println);
     }
 }
