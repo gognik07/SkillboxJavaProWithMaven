@@ -4,7 +4,12 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-import java.io.*;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
 
 public class Main {
@@ -21,25 +26,12 @@ public class Main {
                 String pathImage = e.absUrl("src");
                 URL urlImage = new URL(pathImage);
                 String namePicture = pathImage.split("/")[pathImage.split("/").length - 1];
-                if (namePicture.contains("?")) {
+                if (namePicture.contains("?") || !namePicture.contains(".")) {
                     return;
                 }
 
-                InputStream is = new BufferedInputStream(urlImage.openStream());
-                ByteArrayOutputStream out = new ByteArrayOutputStream();
-                byte[] buf = new byte[1024];
-                int n = 0;
-                while (-1!=(n=is.read(buf))) {
-                    out.write(buf, 0, n);
-                }
-                out.close();
-                is.close();
-
-                byte[] response = out.toByteArray();
-                FileOutputStream fos = new FileOutputStream(path + "\\" + namePicture);
-                fos.write(response);
-                fos.flush();
-                fos.close();
+                BufferedImage bufferedImage = ImageIO.read(urlImage);
+                ImageIO.write(bufferedImage, namePicture.split("\\.")[1], new File(path + "\\" + namePicture));
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
